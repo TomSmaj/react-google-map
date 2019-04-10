@@ -31,7 +31,7 @@ class GoogleMap extends Component {
         var arr = [waterloo, antones, afs];
 
         var tempArr;
-        for(let i = 0; i++; i< arr.length){
+        for(let i = 0; i < arr.length; i++){            
             tempArr = this.state.markers;
             tempArr.push(new window.google.maps.Marker({position: arr[i], map: this.state.map}))
             this.setState({markers: tempArr});
