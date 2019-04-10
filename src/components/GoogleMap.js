@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import $script from 'scriptjs';
 import "./GoogleMap.css";
 
-// const google = window.google;
-
 class GoogleMap extends Component {
     constructor(props) {
         super(props);
@@ -20,8 +18,8 @@ class GoogleMap extends Component {
 
     createMap = () => {
         var tempMap = new window.google.maps.Map(this.mapRef.current);
-        tempMap.setCenter({ lat: -34.397, lng: 150.644 });
-        tempMap.setZoom(8);
+        tempMap.setCenter({ lat: 30.2672, lng: -97.7431 });
+        tempMap.setZoom(13);
         this.setState({
             map: tempMap
         })
