@@ -1,0 +1,7 @@
+.item{
+    display: block;
+    position: relative;
+    margin: 25px;
+    min-width: 25px;
+    height: 25px;
+}

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import $script from 'scriptjs';
 import "./GoogleMap.css";
 
+
 var openwindow;
 
 class GoogleMap extends Component {
@@ -13,7 +14,6 @@ class GoogleMap extends Component {
         };
         this.mapRef = React.createRef();
         this.createMap = this.createMap.bind(this);
-        // this.createMarkers = this.createMarkers.bind(this);
     }
 
     componentDidMount() {
@@ -27,22 +27,18 @@ class GoogleMap extends Component {
         this.state.map.setCenter({ lat: 30.296238, lng: -97.742591 });
         this.state.map.setZoom(13);
 
-        var waterloo = { lat: 30.271849, lng: -97.754284 };
-        var antones = { lat: 30.296238, lng: -97.742591 };
-        var afs = { lat: 30.324586, lng: -97.708802 };
-        var arr = [waterloo, antones, afs];
-        var names = ["Waterloo Records", "Antones Records", "Austin Film Society"];
+        var arr = this.props.markers;        
 
         var tempArr;
         for (let i = 0; i < arr.length; i++) {
             tempArr = this.state.markers;
-            let marker = new window.google.maps.Marker({ position: arr[i], map: this.state.map, animation: window.google.maps.Animation.DROP });
-            marker.addListener('click', (e) => {    // if event jandler e is not passed to function, 'this' will refer to marker
+            let marker = new window.google.maps.Marker({ position: arr[i].coords, map: this.state.map, animation: window.google.maps.Animation.DROP });
+            marker.addListener('click', (e) => {    // if event handler e is not passed to function, 'this' will refer to marker
                 this.state.map.panTo(marker.getPosition());
             })
 
             let infowindow = new window.google.maps.InfoWindow({
-                content: "<h4>" + names[i] + "</h4>"
+                content: "<h4>" + arr[i].name + "</h4>"
             });
             marker.addListener('click', (e) => {
                 if(openwindow){
