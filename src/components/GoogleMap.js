@@ -29,6 +29,29 @@ class GoogleMap extends Component {
         //     this.state.map.setCenter(this.state.center);
         // }
         this.state.map.panTo(this.props.center);
+        let tempMark;
+        if (this.state.markers.length > 0) {
+            for (let i = 0; i < this.state.markers.length; i++) {
+                let la = Math.round(this.state.markers[i].position.lat() * 1000000) / 1000000;
+                let lo = Math.round(this.state.markers[i].position.lng() * 1000000) / 1000000;
+                let markLatLng = { lat: la, lng: lo };
+                if ((this.props.center.lat === markLatLng.lat) && (this.props.center.lat === markLatLng.lat)) {
+                    tempMark = this.state.markers[i];
+                }
+            }
+            // if (tempMark) {
+            //     let infowindow = new window.google.maps.InfoWindow({
+            //         content: "<h4>hi</h4>"
+            //     });
+            //     tempMark.addListener('click', (e) => {
+            //         if (openwindow) {
+            //             openwindow.close();
+            //         }
+            //         openwindow = infowindow;
+            //         infowindow.open(this.state.map, tempMark)
+            //     })
+            // }
+        }
     }
 
     createMap = () => {
