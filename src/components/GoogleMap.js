@@ -9,6 +9,7 @@ class GoogleMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            center: this.props.center,
             map: {},
             markers: []
         };
@@ -20,14 +21,22 @@ class GoogleMap extends Component {
         $script('https://maps.googleapis.com/maps/api/js?key=AIzaSyBgZLanx1F3uxF339fjCxb0gf647ZLVVoU', this.createMap)
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.state.center !== prevProps.center) {
+            this.setState({ center: this.props.center });
+            this.state.map.setCenter(this.state.center);
+        }
+    }
+
     createMap = () => {
         this.setState({
             map: new window.google.maps.Map(this.mapRef.current)
         })
-        this.state.map.setCenter({ lat: 30.296238, lng: -97.742591 });
+        // this.state.map.setCenter({ lat: 30.296238, lng: -97.742591 });
+        this.state.map.setCenter(this.state.center);
         this.state.map.setZoom(13);
 
-        var arr = this.props.markers;        
+        var arr = this.props.markers;
 
         var tempArr;
         for (let i = 0; i < arr.length; i++) {
@@ -41,9 +50,9 @@ class GoogleMap extends Component {
                 content: "<h4>" + arr[i].name + "</h4>"
             });
             marker.addListener('click', (e) => {
-                if(openwindow){
+                if (openwindow) {
                     openwindow.close();
-                }                
+                }
                 openwindow = infowindow;
                 infowindow.open(this.state.map, marker)
             })
