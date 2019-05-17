@@ -22,10 +22,13 @@ class GoogleMap extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.state.center !== prevProps.center) {
-            this.setState({ center: this.props.center });
-            this.state.map.setCenter(this.state.center);
-        }
+        // console.log("prev props center: " + JSON.stringify(prevProps.center));
+        // console.log("current props center: " + JSON.stringify(this.props.center));
+        // if (this.props.center !== prevProps.center) {
+        //     this.setState({ center: this.props.center });
+        //     this.state.map.setCenter(this.state.center);
+        // }
+        this.state.map.panTo(this.props.center);
     }
 
     createMap = () => {
